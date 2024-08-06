@@ -1,4 +1,4 @@
-namespace Command.Commands.AbstractCommands
+namespace Command.Commands
 {
     public interface ICommand
     {
