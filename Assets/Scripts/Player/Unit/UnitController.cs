@@ -1,9 +1,9 @@
 using UnityEngine;
 using Command.Main;
-using Command.Actions;
 using System.Collections;
 using System;
 using Object = UnityEngine.Object;
+using Command.Commands;
 
 namespace Command.Player
 {
@@ -78,6 +78,8 @@ namespace Command.Player
 
             unitView.UpdateHealthBar((float) CurrentHealth / CurrentMaxHealth);
         }
+
+        public void ProcessUnitCommand(UnitCommand commandToProcess) => GameService.Instance.CommandInvoker.ProcessCommand(commandToProcess);
 
         public void RestoreHealth(int healthToRestore)
         {

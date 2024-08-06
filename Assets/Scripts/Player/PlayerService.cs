@@ -80,7 +80,7 @@ namespace Command.Player
         public void ProcessUnitCommand(UnitCommand commandToProcess)
         {
             SetUnitReferences(commandToProcess);
-            //GetPlayerById(commandToProcess.commandData.ActorPlayerID).ProcessUnitCommand(commandToProcess);
+            GetPlayerById(commandToProcess.commandData.ActorPlayerID).ProcessUnitCommand(commandToProcess);
         }
 
         private void SetUnitReferences(UnitCommand commandToProcess)
