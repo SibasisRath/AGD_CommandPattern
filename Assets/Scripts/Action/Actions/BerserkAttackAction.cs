@@ -33,8 +33,8 @@ namespace Command.Actions
                 targetUnit.TakeDamage(actorUnit.CurrentPower * 2);
             else
             {
-                actorUnit.TakeDamage(actorUnit.CurrentPower * 2);
-                Debug.Log("actor unit must be hit now.");
+                /*actorUnit.TakeDamage(actorUnit.CurrentPower * 2);
+                Debug.Log("actor unit must be hit now.");*/
             }
         }
 
