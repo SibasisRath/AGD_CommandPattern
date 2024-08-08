@@ -18,7 +18,7 @@ namespace Command.Actions
         {
             this.actorUnit = actorUnit;
             this.targetUnit = targetUnit;
-
+            this.isSuccessful = isSuccessful;
 
             actorUnit.PlayBattleAnimation(CommandType.Attack, CalculateMovePosition(targetUnit), OnActionAnimationCompleted);
         }
@@ -26,14 +26,14 @@ namespace Command.Actions
         public void OnActionAnimationCompleted() 
         {
             PlayAttackSound();
-
-            if (IsSuccessful())
+            Debug.Log("attack");
+            if (isSuccessful)
                 targetUnit.TakeDamage(actorUnit.CurrentPower);
             else
                 GameService.Instance.UIService.ActionMissed();
         }
 
-        public bool IsSuccessful() => true;
+       // public bool IsSuccessful() => true;
 
         public Vector3 CalculateMovePosition(UnitController targetUnit) => targetUnit.GetEnemyPosition();
 

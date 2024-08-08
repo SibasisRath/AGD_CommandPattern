@@ -60,7 +60,9 @@ namespace Command.Input
                 case TargetType.Enemy:
                     return selectedUnit.Controller.Owner.PlayerID != GameService.Instance.PlayerService.ActivePlayerID && selectedUnit.Controller.IsAlive();
                 case TargetType.Self:
-                    return selectedUnit.Controller.UnitID == GameService.Instance.PlayerService.ActiveUnitID && selectedUnit.Controller.IsAlive();
+                    return selectedUnit.Controller.UnitID == GameService.Instance.PlayerService.ActiveUnitID 
+                        && selectedUnit.Controller.IsAlive() 
+                        && selectedUnit.Controller.Owner.PlayerID == GameService.Instance.PlayerService.ActivePlayerID;
                 default:
                     throw new System.Exception($"Target Type to be selected might be null. Cannot Validate Selected Unit. Current Target Type to be selected is: {targetTypeToSelect}");
             }

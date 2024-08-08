@@ -93,10 +93,10 @@ namespace Command.Player
             unitView.PlayAnimation(UnitAnimations.DEATH);
         }
 
-        public void PlayBattleAnimation(CommandType actionType, Vector3 battlePosition, Action callback)
+        public void PlayBattleAnimation(CommandType commandType, Vector3 battlePosition, Action callback)
         {
             GameService.Instance.UIService.ResetBattleBackgroundOverlay();
-            MoveToBattlePosition(battlePosition, callback, true, actionType);
+            MoveToBattlePosition(battlePosition, callback, true, commandType);
         }
 
         private void MoveToBattlePosition(Vector3 battlePosition, Action callback = null,  bool shouldPlayActionAnimation = true, CommandType actionTypeToExecute = CommandType.None)
@@ -105,7 +105,7 @@ namespace Command.Player
             unitView.StartCoroutine(MoveToPositionOverTime(battlePosition, moveTime, callback, shouldPlayActionAnimation, actionTypeToExecute));
         }
 
-        private IEnumerator MoveToPositionOverTime(Vector3 targetPosition, float time, Action callback, bool shouldPlayActionAnimation, CommandType actionTypeToExecute)
+        private IEnumerator MoveToPositionOverTime(Vector3 targetPosition, float time, Action callback, bool shouldPlayActionAnimation, CommandType commandTypeToExecute)
         {
             float elapsedTime = 0;
             Vector3 startingPosition = unitView.transform.position;
@@ -120,23 +120,23 @@ namespace Command.Player
             unitView.transform.position = targetPosition;
 
             if (shouldPlayActionAnimation)
-                PlayActionAnimation(actionTypeToExecute);
+                PlayActionAnimation(commandTypeToExecute);
 
             if (callback != null)
                 callback.Invoke();
         }
 
-        private void PlayActionAnimation(CommandType actionType)
+        private void PlayActionAnimation(CommandType commandType)
         {
-            if (actionType == CommandType.None)
+            if (commandType == CommandType.None)
                 return;
             
-            if (actionType == unitScriptableObject.executableCommands[0])
+            if (commandType == unitScriptableObject.executableCommands[0])
                 unitView.PlayAnimation(UnitAnimations.ACTION1);
-            else if (actionType == unitScriptableObject.executableCommands[1])
+            else if (commandType == unitScriptableObject.executableCommands[1])
                 unitView.PlayAnimation(UnitAnimations.ACTION2);
             else
-                throw new System.Exception($"No Animation found for the action type : {actionType}");
+                throw new System.Exception($"No Animation found for the action type : {commandType}");
         }
 
         public void OnActionExecuted()
