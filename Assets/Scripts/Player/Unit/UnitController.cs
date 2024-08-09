@@ -17,12 +17,23 @@ namespace Command.Player
         public UnitType UnitType => unitScriptableObject.UnitType;
         public int CurrentHealth { get; private set; }
         public UnitUsedState UsedState { get; private set; }
-        
+       
+
         private UnitAliveState aliveState;
         private Vector3 originalPosition;
-        public int CurrentPower;
+        private int previousPower;
+        private int currentPower;
         public int CurrentMaxHealth;
 
+        public int CurrentPower
+        {
+            get => currentPower;
+            set
+            {
+                previousPower = currentPower;
+                currentPower = value;
+            }
+        }
         public UnitController(PlayerController owner, UnitScriptableObject unitScriptableObject, Vector3 unitPosition)
         {
             Owner = owner;
@@ -46,6 +57,7 @@ namespace Command.Player
         {
             CurrentMaxHealth = CurrentHealth = unitScriptableObject.MaxHealth;
             CurrentPower = unitScriptableObject.Power;
+            previousPower = CurrentPower;
             SetAliveState(UnitAliveState.ALIVE);
             SetUsedState(UnitUsedState.NOT_USED);
         }
@@ -149,7 +161,13 @@ namespace Command.Player
 
         public void ResetStats() => CurrentPower = unitScriptableObject.Power;
 
-        public void Revive() => SetAliveState(UnitAliveState.ALIVE);
+        public void RevivePreviousPowerStats() => currentPower = previousPower;
+
+        public void Revive()
+        {
+            SetAliveState(UnitAliveState.ALIVE);
+            unitView.PlayAnimation(UnitAnimations.IDLE);
+        }
 
         public void Destroy() => UnityEngine.Object.Destroy(unitView.gameObject);
 

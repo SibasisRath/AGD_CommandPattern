@@ -30,10 +30,12 @@ namespace Command.Actions
             GameService.Instance.SoundService.PlaySoundEffects(Sound.SoundType.BERSERK_ATTACK);
 
             if (IsSuccessful())
+            {
                 targetUnit.TakeDamage(actorUnit.CurrentPower * 2);
+            }
             else
             {
-                /*actorUnit.TakeDamage(actorUnit.CurrentPower * 2);
+/*                actorUnit.TakeDamage(actorUnit.CurrentPower * 2);
                 Debug.Log("actor unit must be hit now.");*/
             }
         }
