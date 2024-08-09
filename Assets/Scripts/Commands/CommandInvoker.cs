@@ -1,3 +1,4 @@
+using Command.Main;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,19 @@ namespace Command.Commands
         /// </summary>
         /// <param name="commandToExecute">The command to be executed.</param>
         public void ExecuteCommand(ICommand commandToExecute) => commandToExecute.Execute();
+
+        private bool RegistryEmpty() => commandRegistry.Count == 0;
+
+        private bool CommandBelongsToActivePlayer()
+        {
+            return (commandRegistry.Peek() as UnitCommand).commandData.ActorPlayerID == GameService.Instance.PlayerService.ActivePlayerID;
+        }
+
+        public void Undo()
+        {
+            if (!RegistryEmpty() && CommandBelongsToActivePlayer())
+                commandRegistry.Pop().Undo();
+        }
 
         /// <summary>
         /// Register a command by adding it to the command registry stack.
