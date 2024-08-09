@@ -4,5 +4,7 @@ namespace Command.Commands
     {
         // This method defines the contract for executing a command.
         void Execute();
+
+        public void Undo();
     }
 }
