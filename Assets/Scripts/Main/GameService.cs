@@ -10,6 +10,7 @@ using Command.Battle;
 using Command.Actions;
 using UnityEngine.UI;
 using Command.Commands;
+using Command.Replay;
 
 namespace Command.Main
 {
@@ -47,14 +48,14 @@ namespace Command.Main
 
         private void Start()
         {
-            SoundService = new SoundService(soundScriptableObject, sfxSource, bgMusicSource);
-            EventService = new EventService();
-            ActionService = new ActionService();
-            InputService = new InputService();
-            BattleService = new BattleService(battleScriptableObjects);
-            PlayerService = new PlayerService();
-            CommandInvoker = new CommandInvoker();
-            ReplayService = new ReplayService();
+            SoundService = new (soundScriptableObject, sfxSource, bgMusicSource);
+            EventService = new ();
+            ActionService = new ();
+            InputService = new ();
+            BattleService = new(battleScriptableObjects);
+            PlayerService = new ();
+            CommandInvoker = new ();
+            ReplayService = new ();
             uiService.Init(battleScriptableObjects.Count);
         }
 

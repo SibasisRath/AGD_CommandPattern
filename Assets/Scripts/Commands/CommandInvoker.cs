@@ -1,7 +1,5 @@
 using Command.Main;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Command.Commands
 {
@@ -12,6 +10,16 @@ namespace Command.Commands
     {
         // A stack to keep track of executed commands.
         private Stack<ICommand> commandRegistry = new Stack<ICommand>();
+
+        public CommandInvoker() => SubscribeToEvents();
+
+        private void SubscribeToEvents() => GameService.Instance.EventService.OnReplayButtonClicked.AddListener(SetReplayStack);
+
+        public void SetReplayStack()
+        {
+            GameService.Instance.ReplayService.SetCommandStack(commandRegistry);
+            commandRegistry.Clear();
+        }
 
         /// <summary>
         /// Process a command, which involves both executing it and registering it.
