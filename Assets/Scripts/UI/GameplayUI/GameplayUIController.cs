@@ -1,5 +1,6 @@
 using Command.Input;
 using Command.Main;
+using System;
 using UnityEngine;
 
 namespace Command.UI
@@ -50,5 +51,7 @@ namespace Command.UI
         public void ShowMissedAction() => gameplayView.ShowMissedText();
 
         public void SetBattleBackgroundImage(Sprite bgSprite) => gameplayView.SetBattleBackgroundImage(bgSprite);
+
+        internal void OnUndoButtonClicked() => GameService.Instance.CommandInvoker.Undo();
     }
 }

@@ -23,7 +23,9 @@ namespace Command.Commands
             if (willHitTarget)
             {
                 if (!targetUnit.IsAlive())
+                {
                     targetUnit.Revive();
+                }
 
                 targetUnit.RestoreHealth(actorUnit.CurrentPower * 2);
                 actorUnit.Owner.ResetCurrentActivePlayer();

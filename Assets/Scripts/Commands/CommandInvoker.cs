@@ -39,7 +39,9 @@ namespace Command.Commands
         public void Undo()
         {
             if (!RegistryEmpty() && CommandBelongsToActivePlayer())
+            {
                 commandRegistry.Pop().Undo();
+            }      
         }
 
         /// <summary>
