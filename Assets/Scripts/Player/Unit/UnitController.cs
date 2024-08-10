@@ -25,6 +25,11 @@ namespace Command.Player
         private int currentPower;
         public int CurrentMaxHealth;
 
+        public bool IsMaxHealth()
+        {
+            return CurrentHealth == CurrentMaxHealth;
+        }
+
         public int CurrentPower
         {
             get => currentPower;
