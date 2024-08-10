@@ -26,7 +26,6 @@ namespace Command.Actions
         public void OnActionAnimationCompleted() 
         {
             PlayAttackSound();
-            Debug.Log("attack");
             if (isSuccessful)
                 targetUnit.TakeDamage(actorUnit.CurrentPower);
             else

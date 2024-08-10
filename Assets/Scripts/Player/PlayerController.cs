@@ -32,6 +32,11 @@ namespace Command.Player
 
         public void ProcessUnitCommand(UnitCommand commandToProcess)
         {
+            Debug.Log("Command to execute: "  
+                + "\nActor Unit: " + commandToProcess.commandData.ActorUnitID
+                + "\nTarget Unit:" + commandToProcess.commandData.TargetUnitID
+                + "\nTarget Player Id: " + commandToProcess.commandData.TargetPlayerID
+                + "\nTarget Unit Id:" + commandToProcess.commandData.TargetUnitID);
             GetUnitByID(commandToProcess.commandData.ActorUnitID).ProcessUnitCommand(commandToProcess);
         }
 
