@@ -36,8 +36,6 @@ namespace Command.Actions
             }
         }
 
-       // public bool IsSuccessful() => true;
-
         public Vector3 CalculateMovePosition(UnitController targetUnit) => targetUnit.GetEnemyPosition();
     }
 }

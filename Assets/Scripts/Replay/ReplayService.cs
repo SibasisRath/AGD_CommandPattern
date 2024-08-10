@@ -4,42 +4,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReplayService 
+namespace Command.Replay
 {
-    // A stack to store recorded commands for replay.
-    private Stack<ICommand> replayCommandStack;
-
-    // Property to get or set the current replay state.
-    public ReplayState ReplayState { get; private set; }
-
-    // Constructor for the ReplayService. Initializes the replay state as "DEACTIVE."
-    public ReplayService() => SetReplayState(ReplayState.DEACTIVE);
-
-    /// Set the replay state to the specified state.
-    public void SetReplayState(ReplayState stateToSet) => ReplayState = stateToSet;
-
-    // Set the command stack for replay, providing a collection of commands to replay.
-    public void SetCommandStack(Stack<ICommand> commandsToSet) => replayCommandStack = new Stack<ICommand>(commandsToSet);
-
-    // Execute the next recorded command in the stack if there are commands left to replay.
-    public void ExecuteNext()
+    public class ReplayService
     {
-        if (replayCommandStack.Count > 0)
+        // A stack to store recorded commands for replay.
+        private Stack<ICommand> replayCommandStack;
+
+        // Property to get or set the current replay state.
+        public ReplayState ReplayState { get; private set; }
+
+        // Constructor for the ReplayService. Initializes the replay state as "DEACTIVE."
+        public ReplayService() => SetReplayState(ReplayState.DEACTIVE);
+
+        /// Set the replay state to the specified state.
+        public void SetReplayState(ReplayState stateToSet) => ReplayState = stateToSet;
+
+        // Set the command stack for replay, providing a collection of commands to replay.
+        public void SetCommandStack(Stack<ICommand> commandsToSet) => replayCommandStack = new Stack<ICommand>(commandsToSet);
+
+        // Execute the next recorded command in the stack if there are commands left to replay.
+        public IEnumerator ExecuteNext()
         {
-            GameService.Instance.StartCoroutine(DelayExecuteNext());
+            yield return new WaitForSeconds(1);
+
+            if (replayCommandStack.Count > 0)
+                GameService.Instance.ProcessUnitCommand(replayCommandStack.Pop());
         }
     }
-
-    private IEnumerator DelayExecuteNext()
-    {
-        yield return new WaitForSeconds(1);
-        GameService.Instance.ProcessUnitCommand(replayCommandStack.Pop());
-
-    }
-}
-
-public enum ReplayState
-{
-    DEACTIVE,
-    ACTIVE
 }

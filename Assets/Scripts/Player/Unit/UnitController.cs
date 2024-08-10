@@ -108,6 +108,7 @@ namespace Command.Player
         {
             SetAliveState(UnitAliveState.DEAD);
             unitView.PlayAnimation(UnitAnimations.DEATH);
+            MoveToBattlePosition(originalPosition, null, false);
         }
 
         public void PlayBattleAnimation(CommandType commandType, Vector3 battlePosition, Action callback)
@@ -146,14 +147,24 @@ namespace Command.Player
         private void PlayActionAnimation(CommandType commandType)
         {
             if (commandType == CommandType.None)
+            {
                 return;
+            }
             
             if (commandType == unitScriptableObject.executableCommands[0])
+            {
                 unitView.PlayAnimation(UnitAnimations.ACTION1);
+            }
+                
             else if (commandType == unitScriptableObject.executableCommands[1])
+            {
                 unitView.PlayAnimation(UnitAnimations.ACTION2);
+            }
+
             else
+            {
                 throw new System.Exception($"No Animation found for the action type : {commandType}");
+            }
         }
 
         public void OnActionExecuted()
