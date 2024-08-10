@@ -24,9 +24,13 @@ namespace Command.Commands
         {
             if (willHitTarget)
             {
-                targetUnit.TakeDamage(actorUnit.CurrentPower);
+                if (!targetUnit.IsMaxHealth()) 
+                {
+                    targetUnit.TakeDamage(actorUnit.CurrentPower);
+                }
                 actorUnit.Owner.ResetCurrentActivePlayer();
             }
+            
         }
     }
 }
