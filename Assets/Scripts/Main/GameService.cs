@@ -33,8 +33,9 @@ namespace Command.Main
 
         [SerializeField] private UIService uiService;
         public UIService UIService => uiService;
+        public ReplayService ReplayService { get; private set; }
 
-       
+
 
         // Scriptable Objects:
         [SerializeField] private SoundScriptableObject soundScriptableObject;
@@ -53,6 +54,7 @@ namespace Command.Main
             BattleService = new BattleService(battleScriptableObjects);
             PlayerService = new PlayerService();
             CommandInvoker = new CommandInvoker();
+            ReplayService = new ReplayService();
             uiService.Init(battleScriptableObjects.Count);
         }
 
