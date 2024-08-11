@@ -24,7 +24,7 @@ namespace Command.Commands
         {
             if (willHitTarget)
             {
-                if (!targetUnit.IsMaxHealth()) 
+                if (!targetUnit.WasMaxHealth()) 
                 {
                     targetUnit.TakeDamage(actorUnit.CurrentPower);
                 }
