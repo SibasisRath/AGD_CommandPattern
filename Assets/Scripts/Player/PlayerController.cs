@@ -50,9 +50,15 @@ namespace Command.Player
         private void TryStaringUnitTurn()
         {
             if (IsCurrentUnitAlive())
+            {
                 units[activeUnitIndex].StartUnitTurn();
+            }
+
             else
+            {
                 OnUnitTurnEnded();
+            }
+
         }
 
         public void OnUnitTurnEnded()
@@ -62,9 +68,15 @@ namespace Command.Player
                 // TODO:    Need to check here if any of the players are dead. Not only the active one.
 
                 if (AllUnitsDead())
+                {
                     playerService.PlayerDied(this);
+                }
+
                 else
+                {
                     EndPlayerTurn();
+                }
+                    
             }
             else
             {

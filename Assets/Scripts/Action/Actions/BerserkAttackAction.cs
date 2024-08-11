@@ -29,17 +29,19 @@ namespace Command.Actions
         {
             GameService.Instance.SoundService.PlaySoundEffects(Sound.SoundType.BERSERK_ATTACK);
 
-            if (IsSuccessful())
+            if (isSuccessful)
             {
                 targetUnit.TakeDamage(actorUnit.CurrentPower * 2);
             }
             else
             {
                 actorUnit.TakeDamage(actorUnit.CurrentPower * 2);
+                if (!actorUnit.IsAlive())
+                {
+                    actorUnit.OnActionExecuted();
+                }
             }
         }
-
-        public bool IsSuccessful() => Random.Range(0f, 1f) < hitChance;
 
         public Vector3 CalculateMovePosition(UnitController targetUnit) => targetUnit.GetEnemyPosition();
     }

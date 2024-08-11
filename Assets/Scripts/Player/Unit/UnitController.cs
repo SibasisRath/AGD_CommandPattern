@@ -15,7 +15,17 @@ namespace Command.Player
 
         public int UnitID { get; private set; }
         public UnitType UnitType => unitScriptableObject.UnitType;
-        public int CurrentHealth { get; private set; }
+
+        private int currentHealth;
+        public int CurrentHealth 
+        {
+            get => currentHealth;
+            private set
+            {
+                previousHealth = currentHealth;
+                currentHealth = value;
+            }
+        }
         public UnitUsedState UsedState { get; private set; }
        
 
@@ -23,11 +33,12 @@ namespace Command.Player
         private Vector3 originalPosition;
         private int previousPower;
         private int currentPower;
+        private int previousHealth = 0;
         public int CurrentMaxHealth;
 
-        public bool IsMaxHealth()
+        public bool WasMaxHealth()
         {
-            return CurrentHealth == CurrentMaxHealth;
+            return previousHealth == CurrentMaxHealth;
         }
 
         public int CurrentPower
@@ -108,7 +119,7 @@ namespace Command.Player
         {
             SetAliveState(UnitAliveState.DEAD);
             unitView.PlayAnimation(UnitAnimations.DEATH);
-            MoveToBattlePosition(originalPosition, null, false);
+           // MoveToBattlePosition(originalPosition, null, false);
         }
 
         public void PlayBattleAnimation(CommandType commandType, Vector3 battlePosition, Action callback)
