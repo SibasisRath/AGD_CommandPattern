@@ -8,9 +8,8 @@ namespace Command.UI
     {
         private BattleEndUIController controller;
         [SerializeField] private TextMeshProUGUI resultText;
-        [SerializeField] private Button homeButton;
-
         [SerializeField] private Button replayButton;
+        [SerializeField] private Button homeButton;
 
         private void Start() => SubscribeToButtonClicks();
 

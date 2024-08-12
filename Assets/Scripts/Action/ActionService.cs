@@ -1,5 +1,5 @@
-using Command.Commands;
 using Command.Input;
+using Command.Commands;
 using System.Collections.Generic;
 
 namespace Command.Actions
@@ -12,7 +12,7 @@ namespace Command.Actions
 
         private void CreateActions()
         {
-            actions = new Dictionary<CommandType, IAction>();
+            actions = new ();
             actions.Add(CommandType.Attack, new AttackAction());
             actions.Add(CommandType.Heal, new HealAction());
             actions.Add(CommandType.AttackStance, new AttackStanceAction());

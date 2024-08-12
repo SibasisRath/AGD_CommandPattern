@@ -30,13 +30,11 @@ namespace Command.Main
         public InputService InputService { get; private set; }
         public BattleService BattleService { get; private set; }
         public PlayerService PlayerService { get; private set; }
-        public CommandInvoker CommandInvoker { get; internal set; }
+        public CommandInvoker CommandInvoker { get; private set; }
+        public ReplayService ReplayService { get; private set; }
 
         [SerializeField] private UIService uiService;
         public UIService UIService => uiService;
-        public ReplayService ReplayService { get; private set; }
-
-
 
         // Scriptable Objects:
         [SerializeField] private SoundScriptableObject soundScriptableObject;
@@ -48,15 +46,15 @@ namespace Command.Main
 
         private void Start()
         {
-            SoundService = new (soundScriptableObject, sfxSource, bgMusicSource);
-            EventService = new ();
-            ActionService = new ();
-            InputService = new ();
-            BattleService = new(battleScriptableObjects);
-            PlayerService = new ();
-            CommandInvoker = new ();
-            ReplayService = new ();
+            SoundService = new SoundService(soundScriptableObject, sfxSource, bgMusicSource);
+            EventService = new EventService();
+            ActionService = new ActionService();
+            InputService = new InputService();
+            CommandInvoker = new CommandInvoker();
+            BattleService = new BattleService(battleScriptableObjects);
+            PlayerService = new PlayerService();
             uiService.Init(battleScriptableObjects.Count);
+            ReplayService = new ReplayService();
         }
 
         private void Update() => InputService.UpdateInputService();

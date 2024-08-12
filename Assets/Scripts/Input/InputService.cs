@@ -1,8 +1,6 @@
-using Command.Actions;
-using Command.Commands;
 using Command.Main;
 using Command.Player;
-using UnityEngine;
+using Command.Commands;
 
 namespace Command.Input
 {
@@ -27,7 +25,7 @@ namespace Command.Input
 
         public void UpdateInputService()
         {
-            if(currentState == InputState.SELECTING_TARGET)
+            if (currentState == InputState.SELECTING_TARGET)
                 mouseInputHandler.HandleTargetSelection(targetType);
         }
 
@@ -45,7 +43,7 @@ namespace Command.Input
             GameService.Instance.UIService.ShowTargetOverlay(playerID, selectedTargetType);
         }
 
-        private TargetType SetTargetType(CommandType selectedActionType) => targetType = GameService.Instance.ActionService.GetTargetTypeForAction(selectedActionType);
+        private TargetType SetTargetType(CommandType selectedCommandType) => targetType = GameService.Instance.ActionService.GetTargetTypeForAction(selectedCommandType);
 
         public void OnTargetSelected(UnitController targetUnit)
         {
@@ -53,6 +51,7 @@ namespace Command.Input
             UnitCommand commandToProcess = CreateUnitCommand(targetUnit);
             GameService.Instance.ProcessUnitCommand(commandToProcess);
         }
+
         private UnitCommand CreateUnitCommand(UnitController targetUnit)
         {
 

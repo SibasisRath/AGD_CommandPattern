@@ -21,6 +21,7 @@ namespace Command.Battle
             GameService.Instance.EventService.OnBattleSelected.AddListener(LoadBattle);
             GameService.Instance.EventService.OnReplayButtonClicked.AddListener(ReplayBattle);
         }
+
         private void LoadBattle(int battleId)
         {
             currentBattleId = battleId;

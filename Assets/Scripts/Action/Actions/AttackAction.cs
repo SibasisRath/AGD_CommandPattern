@@ -10,7 +10,6 @@ namespace Command.Actions
     {
         private UnitController actorUnit;
         private UnitController targetUnit;
-
         private bool isSuccessful;
         public TargetType TargetType => TargetType.Enemy;
 
@@ -23,22 +22,21 @@ namespace Command.Actions
             actorUnit.PlayBattleAnimation(CommandType.Attack, CalculateMovePosition(targetUnit), OnActionAnimationCompleted);
         }
 
-        public void OnActionAnimationCompleted() 
+        public void OnActionAnimationCompleted()
         {
             PlayAttackSound();
+
             if (isSuccessful)
                 targetUnit.TakeDamage(actorUnit.CurrentPower);
             else
                 GameService.Instance.UIService.ActionMissed();
         }
 
-       // public bool IsSuccessful() => true;
-
         public Vector3 CalculateMovePosition(UnitController targetUnit) => targetUnit.GetEnemyPosition();
 
         private void PlayAttackSound()
         {
-            switch(actorUnit.UnitType)
+            switch (actorUnit.UnitType)
             {
                 case UnitType.WIZARD:
                     GameService.Instance.SoundService.PlaySoundEffects(Sound.SoundType.MAGIC_BALL);

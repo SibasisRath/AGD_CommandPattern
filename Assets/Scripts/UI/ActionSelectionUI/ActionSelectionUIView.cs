@@ -16,7 +16,7 @@ namespace Command.UI
 
         public void SetActionContainerAlignment(ActionContainerAlignment alignmentToSet)
         {
-            switch(alignmentToSet)
+            switch (alignmentToSet)
             {
                 case ActionContainerAlignment.Left:
                     actionButtonContainer.localPosition = leftAlignedPosition;

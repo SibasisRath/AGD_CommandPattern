@@ -10,9 +10,7 @@ namespace Command.Actions
     {
         private UnitController actorUnit;
         private UnitController targetUnit;
-
         private bool isSuccessful;
-
         public TargetType TargetType => TargetType.Friendly;
 
         public void PerformAction(UnitController actorUnit, UnitController targetUnit, bool isSuccessful)
@@ -28,11 +26,9 @@ namespace Command.Actions
         {
             GameService.Instance.SoundService.PlaySoundEffects(Sound.SoundType.HEAL);
 
-            if (IsSuccessful())
+            if (isSuccessful)
                 targetUnit.RestoreHealth(actorUnit.CurrentPower);
         }
-
-        public bool IsSuccessful() => true;
 
         public Vector3 CalculateMovePosition(UnitController targetUnit) => targetUnit.GetEnemyPosition();
     }
