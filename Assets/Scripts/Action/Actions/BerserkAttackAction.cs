@@ -8,10 +8,8 @@ namespace Command.Actions
 {
     public class BerserkAttackAction : IAction
     {
-        private const float hitChance = 0.66f;
         private UnitController actorUnit;
         private UnitController targetUnit;
-
         private bool isSuccessful;
 
         public TargetType TargetType => TargetType.Enemy;
@@ -30,16 +28,11 @@ namespace Command.Actions
             GameService.Instance.SoundService.PlaySoundEffects(Sound.SoundType.BERSERK_ATTACK);
 
             if (isSuccessful)
-            {
                 targetUnit.TakeDamage(actorUnit.CurrentPower * 2);
-            }
             else
             {
                 actorUnit.TakeDamage(actorUnit.CurrentPower * 2);
-                if (!actorUnit.IsAlive())
-                {
-                    actorUnit.OnActionExecuted();
-                }
+                actorUnit.OnActionExecuted();
             }
         }
 

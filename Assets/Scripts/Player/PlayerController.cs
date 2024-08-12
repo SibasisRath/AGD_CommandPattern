@@ -30,16 +30,6 @@ namespace Command.Player
             }
         }
 
-        public void ProcessUnitCommand(UnitCommand commandToProcess)
-        {
-/*            Debug.Log("Command to execute: "  
-                + "\nActor Unit: " + commandToProcess.commandData.ActorUnitID
-                + "\nTarget Unit:" + commandToProcess.commandData.TargetUnitID
-                + "\nTarget Player Id: " + commandToProcess.commandData.TargetPlayerID
-                + "\nTarget Unit Id:" + commandToProcess.commandData.TargetUnitID);*/
-            GetUnitByID(commandToProcess.commandData.ActorUnitID).ProcessUnitCommand(commandToProcess);
-        }
-
         public void StartPlayerTurn()
         {
             activeUnitIndex = 0;
@@ -50,15 +40,9 @@ namespace Command.Player
         private void TryStaringUnitTurn()
         {
             if (IsCurrentUnitAlive())
-            {
                 units[activeUnitIndex].StartUnitTurn();
-            }
-
             else
-            {
                 OnUnitTurnEnded();
-            }
-
         }
 
         public void OnUnitTurnEnded()
@@ -68,15 +52,9 @@ namespace Command.Player
                 // TODO:    Need to check here if any of the players are dead. Not only the active one.
 
                 if (AllUnitsDead())
-                {
                     playerService.PlayerDied(this);
-                }
-
                 else
-                {
                     EndPlayerTurn();
-                }
-                    
             }
             else
             {
@@ -105,29 +83,22 @@ namespace Command.Player
             units.Clear();
         }
 
-        // TODO:    What is this??
-        public void ResetCurrentActivePlayer()
+        public void ProcessUnitCommand(UnitCommand commandToProcess) => GetUnitByID(commandToProcess.commandData.ActorUnitID).ProcessUnitCommand(commandToProcess);
+
+        public void ResetCurrentActiveUnit()
         {
-            // Reset the unit indicator (Arrow) for the currently active unit.
             units[activeUnitIndex].ResetUnitIndicator();
 
-            // Move to the previous unit in the list.
             activeUnitIndex--;
 
-            // Continue searching for a valid, living unit to make active.
             while (activeUnitIndex >= 0)
             {
-                // Check if the unit at the current index is not alive (i.e., it's defeated).
                 if (!units[activeUnitIndex].IsAlive())
-                {
-                    // Move to the previous unit in the list.
                     activeUnitIndex--;
-                }
                 else
                 {
-                    // Activate the next living unit in the list and start its turn.
                     units[activeUnitIndex].StartUnitTurn();
-                    break; // Exit the loop once an active unit is found.
+                    break;
                 }
             }
         }

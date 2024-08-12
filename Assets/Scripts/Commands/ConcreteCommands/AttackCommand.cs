@@ -1,8 +1,4 @@
-using Command.Actions;
 using Command.Main;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Command.Commands
 {
@@ -25,13 +21,11 @@ namespace Command.Commands
             if (willHitTarget)
             {
                 if (!targetUnit.IsAlive())
-                {
                     targetUnit.Revive();
-                }
+
                 targetUnit.RestoreHealth(actorUnit.CurrentPower);
-                actorUnit.Owner.ResetCurrentActivePlayer();
+                actorUnit.Owner.ResetCurrentActiveUnit();
             }
         }
     }
 }
-

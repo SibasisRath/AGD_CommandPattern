@@ -1,7 +1,4 @@
-using Command.Actions;
 using Command.Main;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Command.Commands
@@ -10,6 +7,7 @@ namespace Command.Commands
     {
         private bool willHitTarget;
         private const float hitChance = 0.2f;
+        private int previousPower;
 
         public CleanseCommand(CommandData commandData)
         {
@@ -17,17 +15,20 @@ namespace Command.Commands
             willHitTarget = WillHitTarget();
         }
 
-        public override void Execute() => GameService.Instance.ActionService.GetActionByType(CommandType.Cleanse).PerformAction(actorUnit, targetUnit, willHitTarget);
-
-        public override bool WillHitTarget() => Random.Range(0f, 1f) < hitChance;
+        public override void Execute()
+        {
+            previousPower = targetUnit.CurrentPower;
+            GameService.Instance.ActionService.GetActionByType(CommandType.Cleanse).PerformAction(actorUnit, targetUnit, willHitTarget);
+        }
 
         public override void Undo()
         {
-            if (willHitTarget) 
-            { 
-                actorUnit.RevivePreviousPowerStats();
-                actorUnit.Owner.ResetCurrentActivePlayer();
-            }
+            if (willHitTarget)
+                targetUnit.CurrentPower = previousPower;
+
+            actorUnit.Owner.ResetCurrentActiveUnit();
         }
+
+        public override bool WillHitTarget() => Random.Range(0f, 1f) < hitChance;
     }
 }

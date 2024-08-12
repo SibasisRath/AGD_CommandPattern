@@ -44,7 +44,7 @@ namespace Command.UI
 
         private void CreateActionButtons(List<CommandType> executableCommands)
         {
-            foreach(CommandType commandType in executableCommands)
+            foreach (CommandType commandType in executableCommands)
             {
                 var button = actionSelectionView.AddButton(actionButtonPrefab);
                 button.SetOwner(this);
@@ -62,7 +62,7 @@ namespace Command.UI
 
         public void SetActionContainerAlignment(int activePlayerID)
         {
-            switch(activePlayerID)
+            switch (activePlayerID)
             {
                 case 1:
                     actionSelectionView.SetActionContainerAlignment(ActionContainerAlignment.Left);
