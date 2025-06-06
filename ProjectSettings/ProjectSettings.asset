@@ -769,11 +769,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: db135d30-64c2-4f39-a694-012f81f4964b
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: AGD_CommandPattern
+  organizationId: mini_dud
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
